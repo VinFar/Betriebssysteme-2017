@@ -1,0 +1,92 @@
+#!/bin/bash
+
+#chmod +rwx osmp_tester
+#Für den Erfolgreichen Ablauf der Test wird empfohlen eine Ausgabe der Pid von OSMPrun durchzuführen, diese muss mithilfe von kill bei manchen Test beendet werden
+#kill (pid)
+
+function main(){
+	
+	starterPath="./osmprun/OSMPrun"
+ 	executablePath="./osmptests"
+	
+	declare -a FUNCTION
+	FUNCTION[0]="test_00"
+	FUNCTION[1]="test_01"
+	FUNCTION[2]="test_02"
+	FUNCTION[3]="test_03"
+	FUNCTION[4]="test_04"
+	FUNCTION[5]="test_05"
+	FUNCTION[6]="test_06"
+	FUNCTION[7]="test_07"
+	FUNCTION[8]="test_08"
+	FUNCTION[9]="test_09"
+	FUNCTION[10]="test_10"
+	FUNCTION[11]="test_11"
+	
+
+	for i in `seq $1 11`; do   
+		${FUNCTION[$i]} $starterPath $executablePath;
+		read -p "Press any key to continue" -n1 -s;
+		echo '--------------------------------------------------------------------------------------------------------------'
+	done
+	
+}
+
+function test_00(){
+	$1 1 $2"/test_00"  
+}
+
+function test_01(){
+	$1 1 $2"/test_01" 
+}
+
+function test_02(){
+	$1 1 $2"/test_02" 
+}
+
+function test_03(){
+	echo '###################need to kill OSMPrun manually###################'
+	$1 43 $2"/test_03"
+}
+
+function test_04(){
+	$1 2 $2"/test_04" 
+}
+
+function test_05(){
+	echo '#############################need to kill OSMPrun manually#############################'
+	echo '####################Sucessfull if only trying to receiv msg 1##########################'
+    $1 1 $2"/test_05" 
+}
+
+function test_06(){
+	$1 1 $2"/test_06" 
+}
+
+function test_07(){
+	$1 270 $2"/test_07" 
+}
+
+function test_08(){
+	$1 2 $2"/test_08" 
+}
+
+function test_09(){
+	$1 2 $2"/test_09" 
+}
+
+function test_10(){
+	$1 2 $2"/test_10" 
+}
+
+function test_11(){
+	$1 2 $2"/test_011" 
+}
+
+
+if [ $# -eq 0 ]
+  then
+    main 0
+  else
+    main $1
+fi
